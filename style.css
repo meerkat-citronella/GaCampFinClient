@@ -1,0 +1,37 @@
+h1 {
+}
+
+.site-chunk {
+	background-color: #c4c4c4;
+	padding: 0.5em;
+	font-family: Source Code Pro;
+	margin: 1em auto;
+	width: 90%;
+}
+
+.header {
+	text-align: center;
+}
+
+.nav {
+	text-align: center;
+}
+
+#main {
+}
+
+.container {
+	display: inline-block;
+	width: 300px;
+	/* height: 400px; */
+	vertical-align: top;
+	/* overflow: auto; */
+}
+
+.container h2 {
+	hyphens: auto;
+}
+
+.container ol {
+	/* overflow: hidden; */
+}

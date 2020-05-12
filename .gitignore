@@ -1,0 +1,5 @@
+# firebase config object with api key etc
+credentials
+
+# .DS_store file... just some apple thing idk 
+.DS_store
