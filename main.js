@@ -57,8 +57,8 @@ function renderSenatorData(doc) {
 		container
 	);
 
-	///// GRID TRACK /////
-	// headColOne
+	///// HEAD /////
+	// col 1
 	if (senParty === "Republican") headColOne.style.backgroundColor = "#D69191";
 	if (senParty === "Democrat") headColOne.style.backgroundColor = "#91B9D6";
 
@@ -70,14 +70,14 @@ function renderSenatorData(doc) {
 	);
 	renderPhoto(senFileName, photoEnclosure);
 
-	// headColTwo
+	// col 2
 	// render info data
 	renderName(senName, headColTwo);
 	renderSenInfoElement("Party: ", senParty, headColTwo);
 	renderSenInfoElement("District: ", senDistrict, headColTwo);
 	renderSenInfoElement("City: ", senCity, headColTwo);
 
-	// headColThree
+	// col 3
 	// render contribution total
 	renderElementWithString(
 		"h2",
@@ -105,8 +105,10 @@ function renderSenatorData(doc) {
 	moreBttn.innerText = "show more";
 
 	///// DROP DOWN /////
+	// render last updated
 	renderSenInfoElement("Last updated: ", lastUpdated, dropdownContainer);
 
+	// render grid track
 	let dropdownTrackContainer = renderElementWithClassName(
 		"div",
 		"dropdown-track",
@@ -123,20 +125,11 @@ function renderSenatorData(doc) {
 		dropdownTrackContainer
 	);
 
+	// col 1
+	// render tracked reports
 	renderElementWithString("h3", "tracked reports*:", dropColOne);
 
-	let ul = document.createElement("ul");
-	for (let report of reports) {
-		let reportName = report.reportName;
-		let totalContributionsPerReport = `\$${numberWithCommas(
-			Number.parseInt(report.totalContributions)
-		)}`;
-		let reportUrl = report.url;
-		let li = document.createElement("li");
-		li.innerHTML = `<a target="_blank" href=${reportUrl}>${reportName}</a>; total raised: ${totalContributionsPerReport}`;
-		ul.appendChild(li);
-	}
-	dropColOne.appendChild(ul);
+	renderContributionReportLinksAndTotals(reports, dropColOne);
 
 	renderElementWithString(
 		"p",
@@ -144,17 +137,17 @@ function renderSenatorData(doc) {
 		dropColOne
 	);
 
+	// col 2
+	// render top contributors
 	renderElementWithString("h3", "top contributors:", dropColTwo);
 
 	if (uniqueContributors.length === 0) {
-		// render error
 		renderSenInfoElement(
 			"Error: senator data missing: ",
 			`An error has occurred while fetching the contribution data for ${senName}. This is likely due to an error on Ga Media State Ethics Site, but could also be due to an error in fetching the data. `,
 			dropColTwo
 		);
 	} else {
-		// if no error, render 20 contributors
 		renderListTopThirtyContributors(
 			senFileName,
 			uniqueContributors,
@@ -173,7 +166,9 @@ function renderSenatorData(doc) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// helper functions
+//////////////////////////////////////////////////   HELPER FUNCTIONS   ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function renderSenInfoElement(keyString, valueString, container) {
 	try {
 		let head = document.createElement("h3");
@@ -286,4 +281,19 @@ function moreBttnClickHandler() {
 		dropdownContainer.style.display = "none";
 		dropdownStatus = false;
 	}
+}
+
+function renderContributionReportLinksAndTotals(reports, container) {
+	let ul = document.createElement("ul");
+	for (let report of reports) {
+		let reportName = report.reportName;
+		let totalContributionsPerReport = `\$${numberWithCommas(
+			Number.parseInt(report.totalContributions)
+		)}`;
+		let reportUrl = report.url;
+		let li = document.createElement("li");
+		li.innerHTML = `<a target="_blank" href=${reportUrl}>${reportName}</a>; total raised: ${totalContributionsPerReport}`;
+		ul.appendChild(li);
+	}
+	container.appendChild(ul);
 }
