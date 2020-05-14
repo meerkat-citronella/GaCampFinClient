@@ -13,78 +13,163 @@ db.collection("senatorSTATS")
 	});
 
 function renderSenatorData(doc) {
+	// firebase data handles
 	let data = doc.data();
-	let uniqueContributors = data.uniqueContributors.data;
-	let totalRaised = `\$${numberWithCommas(
-		Number.parseInt(data.contributionsByReport.totalContributions)
-	)}`;
 	let senName = data.info.displayName;
 	let senFileName = data.info.fileName;
 	let senParty = data.info.party;
 	let senDistrict = data.info.district;
 	let senCity = data.info.city;
-	let container = document.createElement("div");
+	let reports = data.contributionsByReport.data;
+	let uniqueContributors = data.uniqueContributors.data;
+	let totalRaised = `\$${numberWithCommas(
+		Number.parseInt(data.contributionsByReport.totalContributions)
+	)}`;
+	let lastUpdated = data.lastUpdated;
 
-	container.setAttribute("class", "container");
+	let main = document.getElementById("main");
 
-	///// COLUMN ONE /////
-	let colOne = renderElementWithClassName("div", "colOne", container);
+	// render containers
+	let container = renderElementWithClassName("div", "container", main);
+	let headContainer = renderElementWithClassName(
+		"div",
+		"head-container",
+		container
+	);
+	let headColOne = renderElementWithClassName(
+		"div",
+		"headColOne",
+		headContainer
+	);
+	let headColTwo = renderElementWithClassName(
+		"div",
+		"headColTwo",
+		headContainer
+	);
+	let headColThree = renderElementWithClassName(
+		"div",
+		"headColThree",
+		headContainer
+	);
+	let dropdownContainer = renderElementWithClassName(
+		"div",
+		`hidden dropdown-container dropdown-container-${senFileName}`,
+		container
+	);
 
-	if (senParty === "Republican") colOne.style.backgroundColor = "#D69191";
-	if (senParty === "Democrat") colOne.style.backgroundColor = "#91B9D6";
+	///// GRID TRACK /////
+	// headColOne
+	if (senParty === "Republican") headColOne.style.backgroundColor = "#D69191";
+	if (senParty === "Democrat") headColOne.style.backgroundColor = "#91B9D6";
 
 	// render photo
 	let photoEnclosure = renderElementWithClassName(
 		"div",
 		"photo-enclosure",
-		colOne
+		headColOne
 	);
 	renderPhoto(senFileName, photoEnclosure);
 
-	///// COLUMN TWO /////
-	let colTwo = renderElementWithClassName("div", "colTwo", container);
-
+	// headColTwo
 	// render info data
-	renderName(senName, colTwo);
-	renderSenInfoElement("Party: ", senParty, colTwo);
-	renderSenInfoElement("District: ", senDistrict, colTwo);
-	renderSenInfoElement("City: ", senCity, colTwo);
+	renderName(senName, headColTwo);
+	renderSenInfoElement("Party: ", senParty, headColTwo);
+	renderSenInfoElement("District: ", senDistrict, headColTwo);
+	renderSenInfoElement("City: ", senCity, headColTwo);
 
-	///// COLUMN THREE /////
-	let colThree = renderElementWithClassName("div", "colThree", container);
-
+	// headColThree
 	// render contribution total
-	renderElementWithString("h2", `${senName} has raised a total of:`, colThree);
-	renderElementWithString("h1", totalRaised, colThree);
-	renderElementWithString("h2", "in cash and in-kind contributions", colThree);
+	renderElementWithString(
+		"h2",
+		`${senName} has raised a total of:`,
+		headColThree
+	);
+	renderElementWithString("h1", totalRaised, headColThree);
+	renderElementWithString(
+		"h2",
+		"in cash and in-kind contributions",
+		headColThree
+	);
 
 	// render button
 	let bttnEnclosure = renderElementWithClassName(
 		"div",
 		"button-enclosure",
-		colThree
+		headColThree
 	);
-	let moreBttn = renderElementWithString("button", "more", bttnEnclosure);
+	let moreBttn = renderElementWithClassName(
+		"button",
+		`more-button-${senFileName}`,
+		bttnEnclosure
+	);
+	moreBttn.innerText = "show more";
 
-	///// COLUMN THREE /////
+	///// DROP DOWN /////
+	renderSenInfoElement("Last updated: ", lastUpdated, dropdownContainer);
 
-	// // handle a null dataset (i.e. some puppeteer or parse or writing error from the node.js which was pushed to firestore)
-	// if (uniqueContributors.length === 0) {
-	// 	// render error
-	// 	renderSenInfoElement(
-	// 		"Error: senator data missing: ",
-	// 		`An error has occurred while fetching the contribution data for ${senName}. This is likely due to an error on Ga Media State Ethics Site, but could also be due to an error in fetching the data. `,
-	// 		colThree
-	// 	);
-	// } else {
-	// 	// if no error, render 20 contributors
-	// 	renderListTopTwentyContributors(senFileName, uniqueContributors, colThree);
-	// }
+	let dropdownTrackContainer = renderElementWithClassName(
+		"div",
+		"dropdown-track",
+		dropdownContainer
+	);
+	let dropColOne = renderElementWithClassName(
+		"div",
+		"dropColOne",
+		dropdownTrackContainer
+	);
+	let dropColTwo = renderElementWithClassName(
+		"div",
+		"dropColTwo",
+		dropdownTrackContainer
+	);
 
-	// let dataRendered = false;
+	renderElementWithString("h3", "tracked reports*:", dropColOne);
 
-	// append to main
-	main.appendChild(container);
+	let ul = document.createElement("ul");
+	for (let report of reports) {
+		let reportName = report.reportName;
+		let totalContributionsPerReport = `\$${numberWithCommas(
+			Number.parseInt(report.totalContributions)
+		)}`;
+		let reportUrl = report.url;
+		let li = document.createElement("li");
+		li.innerHTML = `<a target="_blank" href=${reportUrl}>${reportName}</a>; total raised: ${totalContributionsPerReport}`;
+		ul.appendChild(li);
+	}
+	dropColOne.appendChild(ul);
+
+	renderElementWithString(
+		"p",
+		"*see methodology tab to see which reports qualify for inclusion",
+		dropColOne
+	);
+
+	renderElementWithString("h3", "top contributors:", dropColTwo);
+
+	if (uniqueContributors.length === 0) {
+		// render error
+		renderSenInfoElement(
+			"Error: senator data missing: ",
+			`An error has occurred while fetching the contribution data for ${senName}. This is likely due to an error on Ga Media State Ethics Site, but could also be due to an error in fetching the data. `,
+			dropColTwo
+		);
+	} else {
+		// if no error, render 20 contributors
+		renderListTopThirtyContributors(
+			senFileName,
+			uniqueContributors,
+			dropColTwo
+		);
+	}
+
+	// dropdown toggle (JQuery)
+	$(document).ready(() => {
+		$(`.more-button-${senFileName}`).click(() => {
+			$(`.dropdown-container-${senFileName}`).toggleClass("hidden");
+			if (moreBttn.innerText === "show more") moreBttn.innerText = "hide";
+			else moreBttn.innerText = "show more";
+		});
+	});
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +213,7 @@ function renderName(name, container) {
 	}
 }
 
-function renderListTopTwentyContributors(
+function renderListTopThirtyContributors(
 	fileName,
 	uniqueContributorsArray,
 	container
@@ -136,12 +221,14 @@ function renderListTopTwentyContributors(
 	try {
 		let ol = document.createElement("ol");
 		ol.setAttribute("data-id", fileName);
-		for (let i = 0; i < 20; i++) {
+		for (let i = 0; i < 30; i++) {
 			let li = document.createElement("li");
 			li.textContent =
 				uniqueContributorsArray[i].contributor +
-				", " +
-				Number.parseInt(uniqueContributorsArray[i].totalContributions);
+				": " +
+				`\$${numberWithCommas(
+					Number.parseInt(uniqueContributorsArray[i].totalContributions)
+				)}`;
 			ol.appendChild(li);
 		}
 		container.appendChild(ol);
@@ -188,5 +275,15 @@ function numberWithCommas(x) {
 	} catch (err) {
 		console.log("error rendering number:\n" + x);
 		console.log(err);
+	}
+}
+
+function moreBttnClickHandler() {
+	if (dropdownStatus === false) {
+		dropdownContainer.style.display = "block";
+		dropdownStatus = true;
+	} else {
+		dropdownContainer.style.display = "none";
+		dropdownStatus = false;
 	}
 }

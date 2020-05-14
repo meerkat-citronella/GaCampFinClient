@@ -1,3 +1,4 @@
+/* general  */
 .site-chunk {
 	background-color: #c4c4c4;
 	padding-top: 1em;
@@ -15,37 +16,67 @@
 	text-align: center;
 }
 
+.nav ul {
+	list-style-type: none;
+}
+
+.nav * {
+	display: inline;
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+}
+
 #main {
 	padding: 0;
 	background-color: transparent;
 }
 
-.container {
+/* render senator data */
+.head-container {
 	display: grid;
 	grid-template-columns: 30% 30% 40%;
 	grid-template-rows: 320px;
-	/* margin: 1.5em; */
 	padding: 1em;
 	overflow: hidden;
 	background-color: #c4c4c4;
 	margin-bottom: 1em;
 }
 
-.colOne {
+.dropdown-container {
+	background-color: #c4c4c4;
+	padding: 1em;
+	margin-bottom: 1em;
+}
+
+.dropdown-container > h3,
+.dropdown-container > p {
+	display: inline;
+}
+
+.dropdown-track {
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.hidden {
+	display: none;
+}
+
+.headColOne {
 	text-align: center;
 }
 
-.colTwo,
-.colThree {
+.headColTwo,
+.headColThree {
 	padding: 1em;
 }
 
-.colTwo h1 {
+.headColTwo h1 {
 	margin-left: 30px;
 }
 
-.colTwo h3,
-.colTwo p {
+.headColTwo h3,
+.headColTwo p {
 	margin-left: 50px;
 }
 
@@ -53,11 +84,11 @@
 	margin-top: 0;
 }
 
-.colThree h2 {
+.headColThree h2 {
 	margin-top: 0;
 }
 
-.colThree h1 {
+.headColThree h1 {
 	margin: 1.5em auto;
 	text-align: center;
 }
@@ -74,7 +105,13 @@
 	padding: 20px 0;
 }
 
+.button-enclosure {
+	text-align: center;
+}
+
 button {
-	width: 100px;
-	height: 30px;
+	width: 250px;
+	height: 50px;
+	font-size: 1em;
+	font-family: Source Code Pro;
 }
