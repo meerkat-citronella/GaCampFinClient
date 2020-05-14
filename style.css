@@ -1,9 +1,7 @@
-h1 {
-}
-
 .site-chunk {
 	background-color: #c4c4c4;
-	padding: 0.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
 	font-family: Source Code Pro;
 	margin: 1em auto;
 	width: 90%;
@@ -18,20 +16,65 @@ h1 {
 }
 
 #main {
+	padding: 0;
+	background-color: transparent;
 }
 
 .container {
-	display: inline-block;
-	width: 300px;
-	/* height: 400px; */
-	vertical-align: top;
-	/* overflow: auto; */
+	display: grid;
+	grid-template-columns: 30% 30% 40%;
+	grid-template-rows: 320px;
+	/* margin: 1.5em; */
+	padding: 1em;
+	overflow: hidden;
+	background-color: #c4c4c4;
+	margin-bottom: 1em;
 }
 
-.container h2 {
-	hyphens: auto;
+.colOne {
+	text-align: center;
 }
 
-.container ol {
-	/* overflow: hidden; */
+.colTwo,
+.colThree {
+	padding: 1em;
+}
+
+.colTwo h1 {
+	margin-left: 30px;
+}
+
+.colTwo h3,
+.colTwo p {
+	margin-left: 50px;
+}
+
+.name {
+	margin-top: 0;
+}
+
+.colThree h2 {
+	margin-top: 0;
+}
+
+.colThree h1 {
+	margin: 1.5em auto;
+	text-align: center;
+}
+
+.photo-enclosure {
+	height: 300px;
+	max-width: 300px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.photo-enclosure img {
+	height: 280px;
+	padding: 20px 0;
+}
+
+button {
+	width: 100px;
+	height: 30px;
 }
