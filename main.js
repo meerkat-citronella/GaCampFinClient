@@ -59,8 +59,10 @@ function renderSenatorData(doc) {
 
 	///// HEAD /////
 	// col 1
-	if (senParty === "Republican") headColOne.style.backgroundColor = "#D69191";
-	if (senParty === "Democrat") headColOne.style.backgroundColor = "#91B9D6";
+	if (senParty === "Republican")
+		headColOne.style.backgroundColor = "hsla(5, 36%, 53%, 1)";
+	if (senParty === "Democrat")
+		headColOne.style.backgroundColor = "hsla(214, 32%, 55%, 1)";
 
 	// render photo
 	let photoEnclosure = renderElementWithClassName(
@@ -80,13 +82,13 @@ function renderSenatorData(doc) {
 	// col 3
 	// render contribution total
 	renderElementWithString(
-		"h2",
+		"p",
 		`${senName} has raised a total of:`,
 		headColThree
 	);
 	renderElementWithString("h1", totalRaised, headColThree);
 	renderElementWithString(
-		"h2",
+		"p",
 		"in cash and in-kind contributions",
 		headColThree
 	);
