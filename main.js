@@ -2,6 +2,15 @@
 firebase.initializeApp(firebaseConfig);
 db = firebase.firestore();
 
+/////////////// RENDER TOPS ///////////////
+db.collection("metaSTATS")
+	.doc("metaSTATSpartial")
+	.get()
+	.then((doc) => {
+		renderTop30(doc);
+	});
+
+/////////////// RENDER SENATORS ///////////////
 // get data from firebase and call render function
 db.collection("senatorSTATS")
 	.get()
@@ -33,7 +42,7 @@ function renderSenatorData(doc) {
 	let container = renderElementWithClassName("div", "container", main);
 	let headContainer = renderElementWithClassName(
 		"div",
-		"head-container",
+		`head-container container-${senFileName}`,
 		container
 	);
 	let headColOne = renderElementWithClassName(
@@ -60,9 +69,9 @@ function renderSenatorData(doc) {
 	///// HEAD /////
 	// col 1
 	if (senParty === "Republican")
-		headColOne.style.backgroundColor = "hsla(5, 36%, 53%, 1)";
+		headColOne.style.backgroundColor = "hsla(5, 36%, 80%, 1)";
 	if (senParty === "Democrat")
-		headColOne.style.backgroundColor = "hsla(214, 32%, 55%, 1)";
+		headColOne.style.backgroundColor = "hsla(214, 32%, 83%, 1)";
 
 	// render photo
 	let photoEnclosure = renderElementWithClassName(
@@ -89,22 +98,9 @@ function renderSenatorData(doc) {
 	renderElementWithString("h1", totalRaised, headColThree);
 	renderElementWithString(
 		"p",
-		"in cash and in-kind contributions",
+		"in itemized cash and in-kind contributions",
 		headColThree
 	);
-
-	// render button
-	let bttnEnclosure = renderElementWithClassName(
-		"div",
-		"button-enclosure",
-		headColThree
-	);
-	let moreBttn = renderElementWithClassName(
-		"button",
-		`more-button-${senFileName}`,
-		bttnEnclosure
-	);
-	moreBttn.innerText = "show more";
 
 	///// DROP DOWN /////
 	// render last updated
@@ -159,7 +155,7 @@ function renderSenatorData(doc) {
 
 	// dropdown toggle (JQuery)
 	$(document).ready(() => {
-		$(`.more-button-${senFileName}`).click(() => {
+		$(`.container-${senFileName}`).click(() => {
 			$(`.dropdown-container-${senFileName}`).toggleClass("hidden");
 			if (moreBttn.innerText === "show more") moreBttn.innerText = "hide";
 			else moreBttn.innerText = "show more";
@@ -171,14 +167,32 @@ function renderSenatorData(doc) {
 //////////////////////////////////////////////////   HELPER FUNCTIONS   ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function renderTop30(doc) {
+	let topContributorsArray = doc.data().data;
+	let heroColTwo = document.querySelector(".hero-col-two");
+	let ol = document.createElement("ol");
+
+	for (let i = 0; i < 10; i++) {
+		let totalContributions = `\$${numberWithCommas(
+			Number.parseInt(topContributorsArray[i].totalContributions)
+		)}`;
+		renderElementWithString(
+			"li",
+			`${topContributorsArray[i].contributor}, ${totalContributions}`,
+			ol
+		);
+	}
+	heroColTwo.appendChild(ol);
+}
+
 function renderSenInfoElement(keyString, valueString, container) {
 	try {
-		let head = document.createElement("h3");
-		head.innerText = keyString;
-		container.appendChild(head);
 		let p = document.createElement("p");
-		p.innerText = valueString;
+		p.innerText = keyString;
 		container.appendChild(p);
+		let head = document.createElement("h3");
+		head.innerText = valueString;
+		container.appendChild(head);
 	} catch (err) {
 		console.log(
 			"error rendering some element\n" + keyString + "\n" + valueString

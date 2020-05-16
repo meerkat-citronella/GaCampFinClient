@@ -19,7 +19,7 @@ a:hover {
 	font-family: "Barlow", sans-serif;
 	font-weight: 600;
 	font-size: 1.3em;
-	background-color: hsla(71, 20%, 90%, 1);
+	background-color: hsla(71, 20%, 100%, 1);
 	color: hsla(214, 32%, 10%, 1);
 }
 
@@ -55,7 +55,7 @@ a:hover {
 	display: grid;
 	grid-template-columns: 60% 40%;
 	padding: 2em 5em;
-	color: hsla(71, 20%, 90%, 1);
+	color: hsla(71, 20%, 100%, 1);
 }
 
 .hero-col-one {
@@ -86,7 +86,7 @@ a:hover {
 /* main */
 #main {
 	padding: 2em 4em;
-	background-color: hsla(71, 20%, 90%, 1);
+	background-color: hsla(71, 20%, 100%, 1);
 	color: hsla(214, 32%, 10%, 1);
 }
 
@@ -99,6 +99,14 @@ a:hover {
 	overflow: hidden;
 	margin-bottom: 1em;
 	font-family: "Roboto Slab", serif;
+	border: 1px solid hsla(214, 32%, 30%, 0.3);
+	box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	transition: color 0.5s ease;
+}
+
+.head-container:hover {
+	opacity: 0.5;
 }
 
 .head-container h1,
@@ -115,6 +123,8 @@ a:hover {
 .dropdown-container {
 	padding: 1em;
 	margin-bottom: 1em;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
 }
 
 .dropdown-container > h3,
@@ -133,24 +143,26 @@ a:hover {
 
 .headColOne {
 	text-align: center;
+	margin-right: 1em;
 }
 
 .headColTwo,
 .headColThree {
 	padding: 1em;
+	background-color: hsla(71, 60%, 93%, 1);
 }
 
 .headColTwo {
 	padding-left: 2em;
 }
 
-.headColTwo p {
-	margin-top: 0.4em;
-	font-weight: 300;
+.headColTwo h3 {
+	margin-top: 0.1em;
 }
 
-.headColTwo h3 {
+.headColTwo p {
 	margin-bottom: 0;
+	font-weight: 300;
 }
 
 .headColTwo h3,
@@ -195,7 +207,8 @@ button {
 	width: 250px;
 	height: 50px;
 	font-size: 1em;
-	font-family: Source Code Pro;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
 }
 
 /* fonts styles */
