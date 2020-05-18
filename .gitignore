@@ -8,3 +8,6 @@ credentials
 .firebaserc
 .firebase/
 firebase.json
+
+# scratch 
+SCRATCH.js
