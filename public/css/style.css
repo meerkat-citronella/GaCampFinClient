@@ -295,7 +295,11 @@ button {
 	list-style: none;
 }
 
-.footer ul {
+.site-footer-left {
+	padding: 0;
+	margin: 0;
+}
+.site-footer-right {
 	padding: 0;
 	margin: 0;
 }
@@ -340,6 +344,7 @@ button {
 
 /* ~~~~~~~~~~~~ MEDIA QUERIES ~~~~~~~~~~~~ */
 @media only screen and (max-width: 480px) {
+	/* ~~~~~~~~ INDEX ~~~~~~~~ */
 	.header {
 		padding: 1.5em 0.7em 0.7em 0.7em;
 	}
@@ -462,12 +467,37 @@ button {
 		padding-left: 1.4em;
 	}
 
-	.dropColOne li {
-		/* list-style: none; */
-	}
-
 	.dropColTwo ol {
 		padding-left: 1.4em;
+	}
+
+	.footer {
+		padding: 1em;
+	}
+
+	.site-footer-left {
+		display: block;
+		font-size: 0.8em;
+		margin-bottom: 1em;
+	}
+
+	.site-header-left li {
+		margin-bottom: 1em;
+	}
+
+	.site-footer-right {
+		float: initial;
+	}
+
+	/* ~~~~~~~~ METHDOLOGY ~~~~~~~~ */
+	.methodology-container {
+		padding: 1.4em;
+	}
+
+	.methodology-column-container {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
 	}
 }
 
