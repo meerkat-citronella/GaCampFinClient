@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,200;0,600;0,800;1,600;1,800&family=Roboto+Slab:wght@300;400&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Ga Camp Fin Client</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.js"
+			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="nav">
+				<ul class="site-header-left">
+					<li>
+						<img src="./assets/GaFlag.png" alt="flag of the state of georgia" />
+					</li>
+				</ul>
+				<ul class="site-header-right">
+					<li>
+						<a href="./index.html"> Home</a>
+					</li>
+					<li>
+						<a href="./methodology/methodology.html">Methodology</a>
+					</li>
+					<li>
+						<a href="./about/about.html">About</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page-hero">
+			<div class="hero-col-one">
+				<h3>Welcome to the</h3>
+				<h1>Georgia State Senate Accountability Project</h1>
+			</div>
+			<div class="hero-col-two">
+				<p>
+					This website shows the sitting Georgia State Senators and all the
+					itemized contributions they've received during their time in office.
+					It also shows their top donors. Take a look, and see where your
+					represenative is getting their money from.
+				</p>
+				<div class="tops">
+					<p>click here to view</p>
+					<h1>
+						Top Contributors
+					</h1>
+				</div>
+			</div>
+		</div>
+		<div class="full-tops hidden">
+			<h1>
+				Top Contributors
+			</h1>
+			<div class="full-tops-ol-container"></div>
+		</div>
+
+		<div id="main"></div>
+
+		<div class="footer">
+			<ul class="site-footer-left">
+				<li>No Copyright. Use this data however you please.</li>
+			</ul>
+			<ul class="site-footer-right">
+				<li>
+					<a href="./index.html"> Home</a>
+				</li>
+				<li>
+					<a href="./methodology/methodology.html">Methodology</a>
+				</li>
+				<li>
+					<a href="./about/about.html">About</a>
+				</li>
+			</ul>
+		</div>
+		<script src="./credentials/firebaseConfig.js"></script>
+		<script src="./js/main.js"></script>
+	</body>
+</html>

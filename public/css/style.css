@@ -1,0 +1,492 @@
+/* ~~~~~~~~~~~~ INDEX ~~~~~~~~~~~~ */
+/* general */
+body {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+	transition: color 0.5s ease;
+}
+
+a:hover {
+	opacity: 0.5;
+}
+
+/* header */
+.header {
+	padding: 2em;
+	font-family: "Barlow", sans-serif;
+	font-weight: 600;
+	font-size: 1.3em;
+	background-color: hsla(71, 20%, 100%, 1);
+	color: hsla(214, 32%, 10%, 1);
+}
+
+.site-header-left {
+	display: inline-block;
+}
+
+.site-header-left img {
+	height: 40px;
+}
+
+.site-header-right {
+	float: right;
+}
+
+.site-header-right li {
+	display: inline;
+	margin-left: 0.6em;
+}
+
+.header li {
+	list-style: none;
+}
+
+.header ul {
+	padding: 0;
+	margin: 0;
+}
+
+/* page hero */
+.page-hero {
+	background-color: hsla(214, 32%, 55%, 1);
+	display: grid;
+	grid-template-columns: 60% 40%;
+	padding: 2em 5em;
+	color: hsla(71, 20%, 100%, 1);
+}
+
+.hero-col-one {
+	padding: 2em 0;
+}
+
+.hero-col-one h3,
+.hero-col-one h1 {
+	font-family: "Barlow", sans-serif;
+}
+
+.hero-col-one h1 {
+	text-transform: uppercase;
+	font-size: 4em;
+	margin-top: 0.2em;
+}
+
+.hero-col-one h3 {
+	font-size: 2em;
+	margin-bottom: 0;
+}
+
+.hero-col-two {
+	padding: 4em 0;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
+}
+
+.hero-col-two > p {
+	width: 65%;
+	margin: 0em auto;
+}
+
+.tops {
+	transition: color 0.5s ease;
+	border-radius: 30px;
+	padding: 0.3em;
+	background-color: hsla(5, 36%, 53%, 0.8);
+	text-align: center;
+	margin-top: 3em;
+	margin-bottom: 0em;
+	margin-left: auto;
+	margin-right: auto;
+	width: 65%;
+	opacity: 0.9;
+}
+
+.tops:hover {
+	opacity: 0.5;
+}
+
+.tops p {
+	margin-bottom: 0.5em;
+}
+
+.tops h1 {
+	margin-top: 0;
+	font-size: 1.8em;
+}
+
+.full-tops {
+	margin-top: 2em;
+	color: hsla(71, 20%, 100%, 1);
+	background-color: hsla(214, 32%, 55%, 1);
+	font-family: "Roboto Slab", serif;
+	padding: 2em 5em;
+}
+
+.full-tops h1 {
+	background-color: hsla(5, 36%, 53%, 0.8);
+	text-align: center;
+	border-bottom: 4px solid hsla(71, 20%, 100%, 1);
+}
+
+.full-tops ol {
+	margin: 0;
+}
+
+.full-tops-ol-container {
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+}
+
+/* main */
+#main {
+	padding: 2em 4em;
+	background-color: hsla(71, 20%, 100%, 1);
+	color: hsla(214, 32%, 10%, 1);
+}
+
+/* render senator data */
+.head-container {
+	display: grid;
+	grid-template-columns: 30% 30% 40%;
+	grid-template-rows: 320px;
+	padding: 1em;
+	overflow: hidden;
+	margin-bottom: 1em;
+	font-family: "Roboto Slab", serif;
+	border: 1px solid hsla(214, 32%, 30%, 0.3);
+	box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	transition: color 0.5s ease;
+}
+
+.head-container:hover {
+	opacity: 0.5;
+}
+
+.head-container h1,
+.head-container h2,
+.head-container h3 {
+	font-family: "Barlow", sans-serif;
+	font-weight: 600;
+}
+
+.head-container h1 {
+	text-transform: uppercase;
+}
+.dropdown-container {
+	padding: 1em;
+	margin-bottom: 1em;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
+}
+
+.dropdown-container > h3,
+.dropdown-container > p {
+	display: inline;
+}
+
+.dropdown-track {
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.hidden {
+	display: none;
+}
+
+.headColOne {
+	text-align: center;
+	margin-right: 1em;
+}
+
+.headColTwo,
+.headColThree {
+	padding: 1em;
+	background-color: hsla(71, 60%, 93%, 1);
+}
+
+.headColTwo {
+	padding-left: 2em;
+}
+
+.headColTwo h3 {
+	margin-top: 0.1em;
+}
+
+.headColTwo p {
+	margin-bottom: 0;
+	font-weight: 300;
+}
+
+.headColTwo h3,
+.headColTwo p {
+	padding-left: 40px;
+}
+
+.name {
+	margin-top: 0;
+}
+
+.headColThree {
+	text-align: center;
+}
+
+.headColThree p {
+	font-weight: 300;
+}
+
+.headColThree h1 {
+	margin: 1.5em auto;
+	text-align: center;
+}
+
+.photo-enclosure {
+	height: 300px;
+	max-width: 300px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.photo-enclosure img {
+	height: 280px;
+	padding: 20px 0;
+}
+
+.button-enclosure {
+	text-align: center;
+}
+
+button {
+	width: 250px;
+	height: 50px;
+	font-size: 1em;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
+}
+
+/* footer */
+.footer {
+	background-color: hsla(71, 60%, 93%, 1);
+	padding: 1em 3em;
+	font-family: "Barlow", sans-serif;
+	font-weight: 200;
+	font-size: 1em;
+	color: hsla(214, 32%, 10%, 1);
+}
+
+.site-footer-left {
+	display: inline-block;
+}
+
+.site-footer-right {
+	float: right;
+}
+
+.site-footer-right li {
+	display: inline;
+	margin-left: 0.6em;
+}
+
+.footer li {
+	list-style: none;
+}
+
+.footer ul {
+	padding: 0;
+	margin: 0;
+}
+
+/* ~~~~~~~~~~~~ METHODOLOGY ~~~~~~~~~~~~ */
+
+/* page hero */
+.hero-small {
+	display: block;
+}
+
+/* methodology */
+.methodology-container {
+	padding: 2em 6em;
+	font-family: "Roboto Slab", serif;
+	font-weight: 300;
+}
+
+.methodology-container h1 {
+	margin-top: 0;
+}
+
+.methodology-container h1,
+.methodology-container h3 {
+	font-family: "Barlow", sans-serif;
+	font-weight: 600;
+}
+
+.methodology-container a {
+	text-decoration: underline;
+}
+
+.methodology-column-container {
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+}
+
+.methodology-column-container * {
+	margin-top: 0;
+}
+
+/* ~~~~~~~~~~~~ MEDIA QUERIES ~~~~~~~~~~~~ */
+@media only screen and (max-width: 480px) {
+	.header {
+		padding: 1.5em 0.7em 0.7em 0.7em;
+	}
+
+	.header ul {
+	}
+	.nav {
+		font-size: 0.9em;
+	}
+
+	.page-hero {
+		padding: 1em;
+		display: block;
+	}
+
+	.hero-col-one,
+	.hero-col-two {
+		padding: 0;
+	}
+
+	.hero-col-one h1 {
+		font-size: 2em;
+	}
+
+	.hero-col-one h3 {
+		margin-top: 0;
+		font-size: 1.5em;
+		font-weight: 600;
+	}
+
+	.hero-col-two > p {
+		width: 100%;
+	}
+
+	.tops {
+		margin: 1em auto 0 auto;
+	}
+
+	.tops * {
+		margin: 0;
+	}
+
+	.tops h1 {
+		font-size: 1.3em;
+	}
+
+	.full-tops {
+		padding: 1em;
+		margin-top: 1em;
+	}
+
+	.full-tops-ol-container {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	}
+
+	#main {
+		padding: 1em 0.7em 0.7em 0.7em;
+	}
+
+	.head-container {
+		display: block;
+	}
+
+	.head-container h1 {
+		font-size: 1.7em;
+		text-align: center;
+	}
+
+	.headColOne {
+		width: 100%;
+	}
+
+	.photo-enclosure img {
+		padding: 10px 0 10px 0;
+	}
+
+	.photo-enclosure {
+		height: 300px;
+	}
+
+	.headColTwo {
+		padding: 0.7em;
+	}
+
+	.headColTwo * {
+		margin: 0;
+		padding: 0;
+		text-align: center;
+	}
+
+	.headColTwo p {
+		margin-top: 0.5em;
+		padding: 0;
+	}
+
+	.headColTwo h3 {
+		margin-top: 0em;
+		padding: 0;
+	}
+
+	.headColThree {
+		padding: 0 0 0.7em 0;
+	}
+
+	.headColThree * {
+		margin: 0;
+	}
+
+	.headColThree h1 {
+		margin: 0.5em auto;
+	}
+
+	.dropdown-track {
+		display: block;
+	}
+
+	.dropdown-track ul {
+		padding-left: 1.4em;
+	}
+
+	.dropColOne li {
+		/* list-style: none; */
+	}
+
+	.dropColTwo ol {
+		padding-left: 1.4em;
+	}
+}
+
+/* fonts styles */ /* font-family: 'Barlow',
+	sans-serif; font-family: 'Roboto Slab',
+	serif; */ /* Color Theme Swatches in HSLA */
+
+.red/blue-triad-1-hsla {
+	color: hsla(5, 36, 53, 1);
+}
+.red/blue-triad-2-hsla {
+	color: hsla(71, 100, 86, 1);
+}
+.red/blue-triad-3-hsla {
+	color: hsla(6, 100, 81, 1);
+}
+.red/blue-triad-4-hsla {
+	color: hsla(213, 100, 76, 1);
+}
+.red/blue-triad-5-hsla {
+	color: hsla(214, 32, 55, 1);
+}

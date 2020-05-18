@@ -1,14 +1,35 @@
 // configure and itialize firebase
 firebase.initializeApp(firebaseConfig);
-db = firebase.firestore();
+const db = firebase.firestore();
+const storage = firebase.storage();
 
 /////////////// RENDER TOPS ///////////////
+let tops = document.querySelector(".tops");
+
+// small tops
+// db.collection("metaSTATS")
+// 	.doc("metaSTATSpartial")
+// 	.get()
+// 	.then((doc) => {
+// 		renderTops(5, ".tops", doc);
+// 	});
+
+// renderElementWithString("p", "(click to see more, below)", tops);
+
+// full tops
 db.collection("metaSTATS")
 	.doc("metaSTATSpartial")
 	.get()
 	.then((doc) => {
-		renderTop30(doc);
+		renderTops(50, ".full-tops-ol-container", doc);
 	});
+
+// dropdown toggle (JQuery)
+$(document).ready(() => {
+	$(`.tops`).click(() => {
+		$(`.full-tops`).toggleClass("hidden");
+	});
+});
 
 /////////////// RENDER SENATORS ///////////////
 // get data from firebase and call render function
@@ -142,7 +163,7 @@ function renderSenatorData(doc) {
 	if (uniqueContributors.length === 0) {
 		renderSenInfoElement(
 			"Error: senator data missing: ",
-			`An error has occurred while fetching the contribution data for ${senName}. This is likely due to an error on Ga Media State Ethics Site, but could also be due to an error in fetching the data. `,
+			`An error has occurred while fetching the contribution data for ${senName}. This is likely due to an error on the <a href='http://media.ethics.ga.gov/search/Campaign/Campaign_ByName.aspx' target='_blank'>GA State Media Ethics Site</a>, but could also be due to an error in fetching the data. `,
 			dropColTwo
 		);
 	} else {
@@ -167,12 +188,12 @@ function renderSenatorData(doc) {
 //////////////////////////////////////////////////   HELPER FUNCTIONS   ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function renderTop30(doc) {
+function renderTops(amount, containerSelector, doc) {
 	let topContributorsArray = doc.data().data;
-	let heroColTwo = document.querySelector(".hero-col-two");
+	let container = document.querySelector(containerSelector);
 	let ol = document.createElement("ol");
 
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < amount; i++) {
 		let totalContributions = `\$${numberWithCommas(
 			Number.parseInt(topContributorsArray[i].totalContributions)
 		)}`;
@@ -182,7 +203,7 @@ function renderTop30(doc) {
 			ol
 		);
 	}
-	heroColTwo.appendChild(ol);
+	container.appendChild(ol);
 }
 
 function renderSenInfoElement(keyString, valueString, container) {
@@ -191,7 +212,7 @@ function renderSenInfoElement(keyString, valueString, container) {
 		p.innerText = keyString;
 		container.appendChild(p);
 		let head = document.createElement("h3");
-		head.innerText = valueString;
+		head.innerHTML = valueString;
 		container.appendChild(head);
 	} catch (err) {
 		console.log(
@@ -201,15 +222,11 @@ function renderSenInfoElement(keyString, valueString, container) {
 	}
 }
 
-function renderPhoto(fileName, container) {
-	try {
-		let img = document.createElement("img");
-		img.setAttribute("src", `./pics/${fileName}.jpg`);
-		container.appendChild(img);
-	} catch (err) {
-		console.log("error rendering image:\n" + fileName);
-		console.log(err);
-	}
+async function renderPhoto(fileName, container) {
+	let img = document.createElement("img");
+	let imgURL = await storage.ref(`${fileName}.jpg`).getDownloadURL();
+	img.setAttribute("src", imgURL);
+	container.appendChild(img);
 }
 
 function renderName(name, container) {
