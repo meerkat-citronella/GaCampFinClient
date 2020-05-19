@@ -35,6 +35,56 @@
 			</div>
 		</div>
 		<div class="page-hero hero-small"></div>
+		<div class="methodology-container">
+			<h1>About</h1>
+			<div class="methodology-column-container">
+				<p>
+					This project aims to increase the accountability and accessibility of
+					local governance. This site contains data from the
+					<a
+						href="http://media.ethics.ga.gov/Search/Campaign/Campaign_ByName.aspx"
+						target="_blank"
+						>Georgia Government Transparency and Campaign Finance Commission</a
+					>: for each sitting state senator, it scrapes all the itemized
+					contributions that they have received during their time as a state
+					senator. It calculates some associated stats, such as each senator’s
+					top donors, and top donors to state senators overall. It originally
+					began as a project for Codecademy Premium, which is an online coding
+					bootcamp.
+				</p>
+
+				<p>
+					The web app consists of two parts. The backend consists of a node.js
+					bot scraper that uses Headless Chrome/Puppeteer to scrape the GA State
+					Senate site and the GA state media ethics site. It persists this data
+					in Firebase Firestore and also Google Cloud Storage (for senator
+					photos). The frontend is built with HTML, CSS, JS, and JQuery.
+				</p>
+
+				<p>
+					Currently, the bot scraper only works on the GA State Media Ethics
+					sites, and is only configured to gather data on State Senators. If you
+					would like to contribute to the project and extend it to other
+					legislative bodies or states, or take it federal, all code can be
+					found on github (<a
+						href="https://github.com/meerkat-citronella/GaCampFin"
+						target="_blank"
+						>node.js bot scraper repo</a
+					>;
+					<a
+						href="https://github.com/meerkat-citronella/GaCampFinClient"
+						target="_blank"
+						>client repo</a
+					>). You will need to configure Firebase for yourself if you would like
+					to contribute; or, if you shoot me an email I can give you write
+					privileges for the Firebase project I am using.
+				</p>
+			</div>
+		</div>
+		<div class="contact">
+			<h1>Contact</h1>
+			<p>Contact us!</p>
+		</div>
 
 		<div class="footer">
 			<ul class="site-footer-left">
