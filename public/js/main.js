@@ -50,12 +50,13 @@ function renderSenatorData(doc) {
 	let senParty = data.info.party;
 	let senDistrict = data.info.district;
 	let senCity = data.info.city;
+	let lastUpdated = data.lastUpdated;
 	let reports = data.contributionsByReport.data;
 	let uniqueContributors = data.uniqueContributors.data;
 	let totalRaised = `\$${numberWithCommas(
 		Number.parseInt(data.contributionsByReport.totalContributions)
 	)}`;
-	let lastUpdated = data.lastUpdated;
+	let buckets = data.buckets;
 
 	let main = document.getElementById("main");
 
@@ -125,7 +126,75 @@ function renderSenatorData(doc) {
 
 	///// DROP DOWN /////
 	// render last updated
-	renderSenInfoElement("Last updated: ", lastUpdated, dropdownContainer);
+	let lastUpdatedContainer = renderElementWithClassName(
+		"div",
+		"last-upated",
+		dropdownContainer
+	);
+	renderSenInfoElement("Last updated: ", lastUpdated, lastUpdatedContainer);
+
+	// render buckets
+	let bucketsContainer = renderElementWithClassName(
+		"div",
+		"buckets-container",
+		dropdownContainer
+	);
+	renderElementWithString("h3", "buckets:", bucketsContainer);
+	let bucketsList = renderElementWithClassName(
+		"ul",
+		"buckets-list",
+		bucketsContainer
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $500 (cash value): ${buckets.bucketOneCashPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $500 (num donations): ${buckets.bucketOneNumPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $1000 (cash value): ${buckets.bucketTwoCashPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $1000 (num donations): ${buckets.bucketTwoNumPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $1500 (cash value): ${buckets.bucketThreeCashPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $1500 (num donations): ${buckets.bucketThreeNumPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $2000 (cash value): ${buckets.bucketFourCashPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions under $2000 (num donations): ${buckets.bucketFourNumPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions over $2000 (cash value): ${buckets.bucketFiveCashPercentage}%`,
+		bucketsList
+	);
+	renderElementWithString(
+		"li",
+		`% contributions over $2000 (num donations): ${buckets.bucketFiveNumPercentage}%`,
+		bucketsList
+	);
 
 	// render grid track
 	let dropdownTrackContainer = renderElementWithClassName(
