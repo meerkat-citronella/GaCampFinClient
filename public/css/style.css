@@ -149,7 +149,7 @@ a:hover {
 	color: hsla(214, 32%, 10%, 1);
 }
 
-/* render senator data */
+/* SENATOR head container */
 .head-container {
 	display: grid;
 	grid-template-columns: 30% 30% 40%;
@@ -185,9 +185,34 @@ a:hover {
 	font-weight: 300;
 }
 
-.dropdown-container > h3,
-.dropdown-container > p {
+.last-updated * {
 	display: inline;
+}
+
+/* SENATOR buckets */
+.buckets-table-head {
+	text-align: center;
+	background-color: grey;
+	color: white;
+}
+
+.buckets-table-head th {
+	padding: 10px;
+}
+
+.buckets-table-body {
+	text-align: center;
+	background-color: lightgrey;
+}
+
+.buckets-table-body td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.buckets-table-body > tr > td:nth-child(1) {
+	text-align: left;
+	font-weight: 400;
 }
 
 .dropdown-track {
@@ -255,18 +280,6 @@ a:hover {
 .photo-enclosure img {
 	height: 280px;
 	padding: 20px 0;
-}
-
-.button-enclosure {
-	text-align: center;
-}
-
-button {
-	width: 250px;
-	height: 50px;
-	font-size: 1em;
-	font-family: "Roboto Slab", serif;
-	font-weight: 300;
 }
 
 /* footer */

@@ -128,73 +128,52 @@ function renderSenatorData(doc) {
 	// render last updated
 	let lastUpdatedContainer = renderElementWithClassName(
 		"div",
-		"last-upated",
+		"last-updated",
 		dropdownContainer
 	);
 	renderSenInfoElement("Last updated: ", lastUpdated, lastUpdatedContainer);
 
-	// render buckets
+	// render buckets table
 	let bucketsContainer = renderElementWithClassName(
 		"div",
 		"buckets-container",
 		dropdownContainer
 	);
 	renderElementWithString("h3", "buckets:", bucketsContainer);
-	let bucketsList = renderElementWithClassName(
-		"ul",
-		"buckets-list",
+	let bucketsTable = renderElementWithClassName(
+		"table",
+		"buckets-table",
 		bucketsContainer
 	);
-	renderElementWithString(
-		"li",
-		`% contributions under $500 (cash value): ${buckets.bucketOneCashPercentage}%`,
-		bucketsList
+
+	renderBucketsTableHeadRow("bucket", "% cash", "% donations", bucketsTable);
+
+	let bucketsTableBody = renderElementWithClassName(
+		"tbody",
+		"buckets-table-body",
+		bucketsTable
 	);
-	renderElementWithString(
-		"li",
-		`% contributions under $500 (num donations): ${buckets.bucketOneNumPercentage}%`,
-		bucketsList
+	renderBucketsTableBodyRow("<$500", "One", bucketsTableBody, buckets);
+	renderBucketsTableBodyRow("$500 - $1,000", "Two", bucketsTableBody, buckets);
+	renderBucketsTableBodyRow(
+		"$1,000 - $1,500",
+		"Three",
+		bucketsTableBody,
+		buckets
 	);
-	renderElementWithString(
-		"li",
-		`% contributions under $1000 (cash value): ${buckets.bucketTwoCashPercentage}%`,
-		bucketsList
+	renderBucketsTableBodyRow(
+		"$1,500 - $2,000",
+		"Four",
+		bucketsTableBody,
+		buckets
 	);
-	renderElementWithString(
-		"li",
-		`% contributions under $1000 (num donations): ${buckets.bucketTwoNumPercentage}%`,
-		bucketsList
+	renderBucketsTableBodyRow(
+		"$2,000 - $2,500",
+		"Five",
+		bucketsTableBody,
+		buckets
 	);
-	renderElementWithString(
-		"li",
-		`% contributions under $1500 (cash value): ${buckets.bucketThreeCashPercentage}%`,
-		bucketsList
-	);
-	renderElementWithString(
-		"li",
-		`% contributions under $1500 (num donations): ${buckets.bucketThreeNumPercentage}%`,
-		bucketsList
-	);
-	renderElementWithString(
-		"li",
-		`% contributions under $2000 (cash value): ${buckets.bucketFourCashPercentage}%`,
-		bucketsList
-	);
-	renderElementWithString(
-		"li",
-		`% contributions under $2000 (num donations): ${buckets.bucketFourNumPercentage}%`,
-		bucketsList
-	);
-	renderElementWithString(
-		"li",
-		`% contributions over $2000 (cash value): ${buckets.bucketFiveCashPercentage}%`,
-		bucketsList
-	);
-	renderElementWithString(
-		"li",
-		`% contributions over $2000 (num donations): ${buckets.bucketFiveNumPercentage}%`,
-		bucketsList
-	);
+	renderBucketsTableBodyRow("<$2,500", "Six", bucketsTableBody, buckets);
 
 	// render grid track
 	let dropdownTrackContainer = renderElementWithClassName(
@@ -247,8 +226,6 @@ function renderSenatorData(doc) {
 	$(document).ready(() => {
 		$(`.container-${senFileName}`).click(() => {
 			$(`.dropdown-container-${senFileName}`).toggleClass("hidden");
-			if (moreBttn.innerText === "show more") moreBttn.innerText = "hide";
-			else moreBttn.innerText = "show more";
 		});
 	});
 }
@@ -398,4 +375,37 @@ function renderContributionReportLinksAndTotals(reports, container) {
 		ul.appendChild(li);
 	}
 	container.appendChild(ul);
+}
+
+function renderBucketsTableHeadRow(
+	colOneHeaderString,
+	colTwoHeaderString,
+	colThreeHeaderString,
+	tableContainer
+) {
+	let th = renderElementWithClassName(
+		"thead",
+		"buckets-table-head",
+		tableContainer
+	);
+	let thRow = renderElementWithClassName("tr", "buckets-table-head-row", th);
+	renderElementWithString("th", colOneHeaderString, thRow);
+	renderElementWithString("th", colTwoHeaderString, thRow);
+	renderElementWithString("th", colThreeHeaderString, thRow);
+}
+
+function renderBucketsTableBodyRow(
+	labelString,
+	bucketNum,
+	tbodyContainer,
+	buckets
+) {
+	let cashPercentagePointer = `bucket${bucketNum}CashPercentage`;
+	let numPercentagePointer = `bucket${bucketNum}NumPercentage`;
+	let cashPercentage = buckets[cashPercentagePointer];
+	let numPercentage = buckets[numPercentagePointer];
+	let tr = renderElementWithClassName("tr", "", tbodyContainer);
+	renderElementWithString("td", labelString, tr);
+	renderElementWithString("td", `${cashPercentage}`, tr);
+	renderElementWithString("td", `${numPercentage}`, tr);
 }

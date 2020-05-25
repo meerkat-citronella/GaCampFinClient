@@ -100,12 +100,36 @@
 					of their state senate career are summed. The resulting array is sorted
 					highest to lowest, and the top 30 contributors are shown.
 				</p>
+				<p>
+					Top contributors data has been cleaned to prevent data duplication.
+					Contributor names have been stripped of common words that might result
+					in duplication, such as: commas, "LLC", "LLP", "Inc.", any leading
+					"The", "Political Action Committee", "PAC", and others. E.g., "The
+					Georgia Medical PAC", "Georgia Medical PAC", and "Georgia Medical PAC,
+					Inc." are all represented in one entry: "Georgia Medical".
+				</p>
+				<p>
+					Cleaning also includes lowercasing all contributor names, filtering
+					out duplicates, and then programmatically re-capitalizing them.
+					Because of this there are some inelegantly-capitalized contributor
+					names, such as "At&t", "Hospac" (should be "HOSPAC"), "Upspac" (should
+					be "UPSPAC"), etc. This decision was made because data integrity is
+					valued above formatting in this instance.
+				</p>
+				<p>
+					In certain cases, data has also been manually scrubbed to prevent
+					duplication. E.g. "HosPAC", "HOS", "hosPAC" are all represented under
+					"Hospac"; E.g. "Civil Justice PAC Inc of the GA Trial Lawyers
+					Association", "Civil Justice PAC, INC.", "Civil Justice PAC", "Civil
+					Justice PAC Inc.", etc., are all represented under "Civil Justice Pac
+					of the Georgia Trial Lawyers Association"
+				</p>
 				<h3>Last updated:</h3>
 				<p>
 					The date and time that the senator's data was scraped. Scraping is
 					done via node.js app (see About tab for more info) that must be
-					manually run in order to update the data. Reports filed after 'last
-					updated' are not included in the senator's dataset.
+					manually triggered in order to update the data. Reports filed after
+					'last updated' are not included in the senator's dataset.
 				</p>
 				<p>
 					Occassionally, errors occur during scraping (poor internet connection,
