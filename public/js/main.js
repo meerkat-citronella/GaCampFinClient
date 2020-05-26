@@ -365,7 +365,7 @@ function moreBttnClickHandler() {
 function renderContributionReportLinksAndTotals(reports, container) {
 	let ul = document.createElement("ul");
 	for (let report of reports) {
-		let reportName = report.reportName;
+		let reportName = cleanReportName(report.reportName);
 		let totalContributionsPerReport = `\$${numberWithCommas(
 			Number.parseInt(report.totalContributions)
 		)}`;
@@ -375,6 +375,17 @@ function renderContributionReportLinksAndTotals(reports, container) {
 		ul.appendChild(li);
 	}
 	container.appendChild(ul);
+}
+
+function cleanReportName(messyReportName) {
+	let year = /^\d+/.exec(messyReportName)[0];
+	let messyMonth = /^(\d+)(\D+)/.exec(messyReportName)[0];
+	let messyDay = /^\d+\w+\d+/.exec(messyReportName)[0];
+	let messyType = /^\d+\w+\d+\w+/.exec(messyReportName)[0];
+	let month = messyMonth.replace(year, "");
+	let day = messyDay.replace(messyMonth, "");
+	let type = messyType.replace(messyDay, "");
+	return year + " " + month + " " + day + " " + type;
 }
 
 function renderBucketsTableHeadRow(
