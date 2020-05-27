@@ -132,6 +132,11 @@ function renderSenatorData(doc) {
 		dropdownContainer
 	);
 	renderSenInfoElement("Last updated: ", lastUpdated, lastUpdatedContainer);
+	renderElementWithInnerHTML(
+		"p",
+		"* see <a href='./methodology/methodology.html'>Methodology</a> tab for explanationa of these datasets",
+		dropdownContainer
+	);
 
 	// render buckets table
 	let bucketsContainer = renderElementWithClassName(
@@ -194,15 +199,9 @@ function renderSenatorData(doc) {
 
 	// col 1
 	// render tracked reports
-	renderElementWithString("h3", "tracked reports*:", dropColOne);
+	renderElementWithString("h3", "tracked reports:", dropColOne);
 
 	renderContributionReportLinksAndTotals(reports, dropColOne);
-
-	renderElementWithString(
-		"p",
-		"*see methodology tab to see which reports qualify for inclusion",
-		dropColOne
-	);
 
 	// col 2
 	// render top contributors
@@ -322,6 +321,18 @@ function renderElementWithString(element, stringToRender, container) {
 		console.log(
 			"error rendering element with string:\n" + element + " " + stringToRender
 		);
+		console.log(err);
+	}
+}
+
+function renderElementWithInnerHTML(element, HTML, container) {
+	try {
+		let el = document.createElement(element);
+		el.innerHTML = HTML;
+		container.appendChild(el);
+		return el;
+	} catch (err) {
+		console.log("error rendering element with HTML:\n" + element + " " + HTML);
 		console.log(err);
 	}
 }
